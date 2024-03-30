@@ -1,94 +1,123 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Ajuste para que o body ocupe a altura total da tela */
-    margin: 0; /* Remove a margem padrão */
-}
 
-/* Estilos para o tema de dia */
-.body-day {
-    background-image: url('caminho_para_sua_imagem_de_dia.jpg');
-    color: black; /* Cor do texto para o tema de dia */
-    background-size: cover; /* Faz com que a imagem de fundo cubra todo o espaço disponível */
-    background-repeat: no-repeat; /* Evita que a imagem se repita */
-    background-position: center; /* Centraliza a imagem de fundo */
-}
 
-/* Estilos para o tema de noite */
-.body-night {
-    background-image: url('https://i.pinimg.com/originals/bc/88/2c/bc882c4a00eb417c655026731ae35255.jpg');
-    color: white; /* Cor do texto para o tema de noite */
+
+.container {
+    display: flex; /* Mantém como flex para o layout principal */
+    flex-direction: row; /* Garante que os itens sejam dispostos em linha */
+    justify-content: space-between; /* Espalha os filhos para ocupar os extremos do contêiner */
+    align-items: flex-start; /* Alinha itens ao topo */
+    width: 90%;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
 }
 
+.day{
+    background-image: url('/container\ dia.svg'); /* Caminho para sua imagem de dia */
+    /* Outras propriedades de estilo conforme necessário */
+}
 
-#weatherResult {
-    width: 100%; /* Ou defina uma largura máxima, ex.: max-width: 600px; */
-    max-width: 600px;
-    margin: 0 auto; /* Centraliza horizontalmente */
-    padding: 20px;
+.night{
+    background-image: url('/container\ noite.svg'); /* Caminho para sua imagem de dia */
+    /* Outras propriedades de estilo conforme necessário */
+}
+.city-name {
+    /* Estilos para o nome da cidade */
+    font-size: 27px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-left: 5%;
+    /* Alinha à esquerda automaticamente como o primeiro item flex */
+
+}
+.weather-stats{
+    font-size:14px;
+    font-weight: bold;
+}
+.weather-info {
+    width: 40%;
+    max-width: 159px;
+    margin-right: 5%; /* Assegura que está alinhada à direita com espaçamento */
+    background-color: #ffffff;
     border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
 
-
-h2 {
-    font-family: 'Arial', sans-serif;
-    color: #333;
+.weather-image {
+    width: 30%; /* Tamanho relativo da imagem */
+    border-radius: 8px; /* Bordas arredondadas para a imagem */
+    margin-bottom: 10px; /* Espaçamento abaixo da imagem */
 }
 
-p {
-    font-family: 'Arial', sans-serif;
-    color: #666;
-}
-#cityName {
-    padding: 10px 15px;
-    border: 2px solid #ccc;
-    border-radius: 20px; /* Bordas arredondadas */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra suave */
-    outline: none; /* Remove o contorno padrão ao focar */
-    transition: all 0.3s ease; /* Efeito suave ao interagir */
+.weather-stats {
+    display: flex;
+    flex-direction: row; /* Alinha os itens horizontalmente */
+    justify-content: flex-start; /* Alinha itens à esquerda e permite que eles cresçam conforme necessário */
+    flex-wrap: wrap; /* Permite que os itens se ajustem para a próxima linha se não houver espaço suficiente */
+    gap: 10px; /* Espaço entre os itens */
+    width: 100%; /* Ajuste a largura conforme necessário */
+    padding: 10px;
+    margin-top: 10px; /* Espaçamento acima da div de estatísticas */
+    border-radius: 10px;
+    background-color: #d3c8c800; /* Cor de fundo suave */
 }
 
-#cityName:focus {
-    border-color: #007bff; /* Cor da borda ao focar */
-    box-shadow: 0 2px 10px rgba(0,123,255,0.2); /* Sombra mais destacada ao focar */
+.stat-item {
+    width: auto;
+    height: 80px;
+    padding: 2px;
+    margin:7px;
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #bebebe,
+                -2px -2px 7px #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
 }
-button {
+.stat-item {
+    width: 80px /* Três itens por linha, ajustando pelo gap */
+    /* Restante do CSS para .stat-item */
+}
+.stat-item:hover {
+    box-shadow: 2px 2px 5px #bebebe,
+                -1px -1px 3px #ffffff;
+}
+
+.stat-icon {
+    width: 30px; /* Define um tamanho fixo para a largura */
+    height: 30px; /* Define um tamanho fixo para a altura */
+    object-fit: cover; /* Garante que o conteúdo da imagem seja coberto, mantendo sua proporção */
+    border-radius: 5px; /* Opcional: adiciona bordas arredondadas para as imagens */
+    transition: transform 0.2s ease-in-out;
+}
+
+.stat-item:hover .stat-icon {
+    transform: scale(1.1); /* Aumenta ligeiramente o tamanho do ícone ao passar o mouse */
+}
+
+#location-btn {
     padding: 10px 20px;
-    background-color: #007bff; /* Cor de fundo */
-    color: white; /* Cor do texto */
+    margin: 20px;
     border: none;
-    border-radius: 20px; /* Bordas arredondadas */
-    cursor: pointer; /* Cursor do mouse como ponteiro */
-    transition: background-color 0.3s ease; /* Transição suave da cor de fundo */
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-button:hover {
-    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
-}
-
-
-@media (max-width: 600px) {
-    body {
-        padding: 20px;
-    }
-
-    #cityName, button {
-        width: 100%; /* Responsivo para dispositivos móveis */
-        margin-bottom: 10px;
-    }
-    .body-night {
-        background-image: url('https://i0.wp.com/imagenswhat.com/wp-content/uploads/2022/11/Wallpaper-4k-30.jpeg');
-        color: white; /* Cor do texto para o tema de noite */
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-    
+#location-btn:hover {
+    background-color: #0056b3;
 }

@@ -1,17 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
-    <title>Previsão do Tempo</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Informações do Clima</title>
+    <link rel="stylesheet" href="style.css"> <!-- Assegure-se de ter o caminho correto para seu CSS -->
 </head>
 <body>
-    <div id="weatherResult">
-    <h1>Verificar Previsão do Tempo</h1>
-    <input type="text" id="cityName" placeholder="Digite o nome da cidade">
-    <button onclick="getWeatherAndTime()">Buscar Clima e Hora</button>
+    <button id="location-btn">Pegar Localização</button>
+    <div class="container" id="mainContainer">
+        <div class="left-side">
+            <div class="city-name" id="cityName">Londres</div> <!-- O nome da cidade será atualizado dinamicamente -->
+            <div class="weather-stats">
+                <div class="stat-item">
+                    <img src="vento.svg" alt="Vento" class="stat-icon">
+                    <p id="windSpeed">20 km/h</p>
+                </div>
+                <div class="stat-item">
+                    <img src="umidade.svg" alt="Umidade" class="stat-icon"> <!-- Certifique-se de ter um ícone adequado -->
+                    <p id="humidity">80%</p> <!-- Placeholder para umidade -->
+                </div>
+                <div class="stat-item">
+                    <img src="term-cold.svg" alt="Sensação Térmica" class="stat-icon" id="feelsLikeIcon"> <!-- Certifique-se de ter um ícone adequado -->
+                    <p id="feelsLike">25°C</p> <!-- Placeholder para sensação térmica -->
+                </div>
+            </div>            
+        </div>
+        <div class="weather-info">
+            <img src="ceu-limpo.svg" alt="Clima" class="weather-image" id="weatherImage"> <!-- A imagem do clima será atualizada dinamicamente -->
+            <div class="weather-details">
+                <p class="current-weather" id="currentWeather">Ensolarado</p> <!-- Estado atual do clima será atualizado dinamicamente -->
+                <p class="temperature-range" id="tempRange">Máx: 25°C, Mín: 18°C</p> <!-- Faixa de temperatura será atualizada dinamicamente -->
+            </div>
+        </div>
     </div>
-    <script src="script.js"></script>
+    
+
+    <script src="script.js"></script> <!-- Assegure-se de ter o caminho correto para seu JavaScript -->
 </body>
 </html>

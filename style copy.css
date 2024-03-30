@@ -1,0 +1,94 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ajuste para que o body ocupe a altura total da tela */
+    margin: 0; /* Remove a margem padrão */
+}
+
+/* Estilos para o tema de dia */
+.body-day {
+    background-image: url('caminho_para_sua_imagem_de_dia.jpg');
+    color: black; /* Cor do texto para o tema de dia */
+    background-size: cover; /* Faz com que a imagem de fundo cubra todo o espaço disponível */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-position: center; /* Centraliza a imagem de fundo */
+}
+
+/* Estilos para o tema de noite */
+.body-night {
+    background-image: url('https://i.pinimg.com/originals/bc/88/2c/bc882c4a00eb417c655026731ae35255.jpg');
+    color: white; /* Cor do texto para o tema de noite */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+#weatherResult {
+    width: 100%; /* Ou defina uma largura máxima, ex.: max-width: 600px; */
+    max-width: 600px;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+
+h2 {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+p {
+    font-family: 'Arial', sans-serif;
+    color: #666;
+}
+#cityName {
+    padding: 10px 15px;
+    border: 2px solid #ccc;
+    border-radius: 20px; /* Bordas arredondadas */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra suave */
+    outline: none; /* Remove o contorno padrão ao focar */
+    transition: all 0.3s ease; /* Efeito suave ao interagir */
+}
+
+#cityName:focus {
+    border-color: #007bff; /* Cor da borda ao focar */
+    box-shadow: 0 2px 10px rgba(0,123,255,0.2); /* Sombra mais destacada ao focar */
+}
+button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none;
+    border-radius: 20px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor do mouse como ponteiro */
+    transition: background-color 0.3s ease; /* Transição suave da cor de fundo */
+}
+
+button:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+}
+
+
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
+    }
+
+    #cityName, button {
+        width: 100%; /* Responsivo para dispositivos móveis */
+        margin-bottom: 10px;
+    }
+    .body-night {
+        background-image: url('https://i0.wp.com/imagenswhat.com/wp-content/uploads/2022/11/Wallpaper-4k-30.jpeg');
+        color: white; /* Cor do texto para o tema de noite */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    
+}
