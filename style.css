@@ -23,7 +23,7 @@
 }
 
 .night{
-    background-image: url('/container\ noite.svg'); /* Caminho para sua imagem de dia */
+    background-image: url('container_noite.svg'); /* Caminho para sua imagem de dia */
     /* Outras propriedades de estilo conforme necessário */
 }
 .city-name {
