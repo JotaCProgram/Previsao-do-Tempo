@@ -18,12 +18,12 @@
 }
 
 .day{
-    background-image: url('/container\ dia.svg'); /* Caminho para sua imagem de dia */
+    background-image: url('/container-dia.svg'); /* Caminho para sua imagem de dia */
     /* Outras propriedades de estilo conforme necessário */
 }
 
 .night{
-    background-image: url('/container\ noite.svg'); /* Caminho para sua imagem de dia */
+    background-image: url('/container-noite.svg'); /* Caminho para sua imagem de dia */
     /* Outras propriedades de estilo conforme necessário */
 }
 .city-name {
