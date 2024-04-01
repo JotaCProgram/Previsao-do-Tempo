@@ -6,9 +6,9 @@
     flex-direction: row; /* Garante que os itens sejam dispostos em linha */
     justify-content: space-between; /* Espalha os filhos para ocupar os extremos do contêiner */
     align-items: flex-start; /* Alinha itens ao topo */
-    width: 90%;
-    margin: 30px auto;
-    padding: 30px;
+    width: 93%;
+    margin: 20px auto;
+    padding: 20px;
     background-color: #ffffff;
     background-size: cover;
     background-position: center;
@@ -26,15 +26,18 @@
     background-image: url('container-noite.svg'); /* Caminho para sua imagem de dia */
     /* Outras propriedades de estilo conforme necessário */
 }
-.city-name {
+
+
+
     /* Estilos para o nome da cidade */
+.city-name {
     font-size: 27px;
     font-weight: bold;
     color: #ffffff;
     margin-left: 5%;
-    /* Alinha à esquerda automaticamente como o primeiro item flex */
-
 }
+
+
 .weather-stats{
     font-size:14px;
     font-weight: bold;
@@ -121,3 +124,160 @@
 #location-btn:hover {
     background-color: #0056b3;
 }
+
+
+
+
+/*DIV forecast*/
+
+#forecastContainerWrapper {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    margin: 30px auto;
+    border-radius: 20px;
+    font-family: sans-serif;
+}
+
+#forecastContainer {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 0 0; /* Adiciona algum espaço verticalmente dentro do contêiner */
+}
+.forecast-item {
+    flex: 0 0 217px; /* Isso substitui flex-grow, flex-shrink e flex-basis */
+    height: 377px;
+    margin: 20px 20px 50px;
+    padding: 1px 83px 21px 73px;
+    border-radius: 21px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+
+#forecastContainer.active {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+}
+
+#forecastContainer {
+    cursor: grab;
+    user-select: none; /* Isso evita a seleção de texto enquanto arrasta */
+}
+/*DIV forecast*/
+
+
+
+/*HOVER forecast*/
+
+
+#forecastContainer:hover{
+    color: #FFFFFF;
+}
+.forecast-item:hover {
+    flex: 0 0 217px; /* Isso substitui flex-grow, flex-shrink e flex-basis */
+    height: 377px;
+    margin: 20px 20px 50px;
+    padding: 1px 83px 21px 73px;
+    border-radius: 21px;
+    box-shadow: 2px 2px 5px #bebebe,
+                -1px -1px 3px #ffffff;
+    transform: scale(1.03); /* Aumenta ligeiramente o tamanho do ícone ao passar o mouse */
+    transition: transform 0.2s ease-in-out;
+    text-align: center;
+}
+h3{
+    color: black;
+}
+.forecast-item {
+    transition: background-color 0.3s, /* Adiciona uma transição suave */
+    /* Restante do seu CSS para .forecast-item aqui */
+}
+
+.forecast-item:hover {
+    background-color: #541eeb; /* Cor de fundo quando o mouse está sobre a div */
+    color: #FFFFFF; /* Cor do texto quando o mouse está sobre a div */
+}
+.forecast-item:hover h3,
+.forecast-item:hover p,
+.forecast-item:hover span {
+    color: #FFFFFF; /* Isso assegura que textos específicos dentro da div também mudem de cor */
+}
+
+
+
+/*HOVER forecast*/
+
+
+/*DIV PERSONALIZADO*/
+
+
+.weather-icon {
+    width:145px; /* Ajuste conforme necessário */
+}
+
+.weather-description {
+    margin: 20px 0;
+    color: black;
+}
+
+.temperature-range {
+    font-size: 1.2em; /* Aumenta o tamanho da fonte para as temperaturas */
+    color: black;
+}
+
+
+.temp-max {
+    font-weight: bold;
+    font-size: 1.4em; /* Faz a temperatura máxima aparecer maior */
+    color: black;
+}
+
+.temp-min {
+    font-size: 20px; /* Garante que a temperatura mínima seja menor */
+    font: 100;
+}
+
+.additional-info p {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espaço entre o ícone e o texto */
+    color: black;
+}
+
+
+
+
+.wind-humidity-info {
+    display: flex;
+    padding: 20px;
+    align-items: center; /* Centraliza os itens verticalmente */
+    gap: 10px; /* Espaço entre os itens */
+    justify-content: start; /* Alinha os itens ao início do contêiner */
+    color: black;
+    font-size: 20px;
+}
+
+.small-icon {
+    width: 27px; /* Ajuste o tamanho conforme necessário */
+}
+
+/* Ajustes adicionais para garantir clareza e consistência */
+.temperature-range, .weather-description, .wind-humidity-info {
+    margin: 5px 0; /* Espaçamento vertical entre os elementos */
+}
+
+
+
+/*SETA*/
+.slide-arrow {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+/*SETA*/

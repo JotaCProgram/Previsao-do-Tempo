@@ -1,22 +1,43 @@
-// Botão para pegar a localização do usuário
-document.getElementById('location-btn').addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('mainContainer');
+    const hour = new Date().getHours(); // Obtém a hora atual
+
+    // Considera-se "day" entre as 6h e as 18h
+    if (hour >= 6 && hour < 18) {
+        container.classList.add('day');
+        container.classList.remove('night');
+    } else {
+        container.classList.add('night');
+        container.classList.remove('day');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            // Chama getForecast com as coordenadas obtidas
+            getForecast(lat, lon);
+            // Chama getWeather com as coordenadas obtidas para atualizar as informações climáticas atuais
+            getWeather(lat, lon);
+
+            // Traduza o conteúdo da página aqui ou chame a função de tradução
+            translateContent();
+
+
+        }, showError);
     } else {
         alert("Geolocalização não é suportada por este navegador.");
     }
 });
 
-// Função para mostrar a posição e buscar o clima
-function showPosition(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
 
-    // Chama getWeather com as coordenadas obtidas
-    getWeather(lat, lon);
-}
 
-// Função para tratar possíveis erros na obtenção da localização
+
+
+
 function showError(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
@@ -80,9 +101,12 @@ function getWeather(lat, lon) {
             case 'Clouds':
                 weatherImageSrc = 'few-clouds.svg';
                 break;
-            case 'MIst':
+            case 'Mist':
                     weatherImageSrc = 'mist.svg';
                     break;
+            case 'Thunderstorm':
+                weatherImageSrc = 'trovoada.svg';
+                break;
             // Adicione mais casos conforme necessário
             default:
                 weatherImageSrc = 'default-weather.svg'; // Uma imagem padrão para condições não especificadas
@@ -98,6 +122,98 @@ function getWeather(lat, lon) {
         console.error('Erro na solicitação:', error);
         // Tratamento de erro apropriado
     });
+}
+
+function getForecast(lat, lon) {
+    var apiKey = '8066df2176ca42f059b61b364c4e61f8'; // Use sua própria chave API
+    // Adiciona 'https://' ao início da URL
+    var url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+    
+    fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na rede - a resposta não foi ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data); // Logando os dados recebidos da API no console
+        updateForecastContainer(data); // Chama a função para atualizar o DOM com os dados da previsão
+    })
+    .catch(error => {
+        console.error('Erro na solicitação:', error);
+    });
+}
+
+const weatherIcons = {
+    "01d": ["assets/clear-sky-day.svg", "assets/clear-sky-2-day.svg"],
+    "01n": ["assets/clear-sky-night.svg", "assets/clear-sky-2-night.svg"],
+    "02d": ["assets/few-clouds-day.svg"],
+    "02n": ["assets/few-clouds-night.svg"],
+    "03d": ["assets/scattered-clouds-day.svg"],
+    "03n": ["assets/scattered-clouds-night.svg"],
+    "04d": ["assets/broken-clouds-day.svg"],
+    "04n": ["assets/broken-clouds-night.svg"],
+    "09d": ["assets/shower-rain-day.svg"],
+    "09n": ["assets/shower-rain-night.svg"],
+    "10d": ["assets/rain-1-day.svg", "assets/rain-2-day.svg"],
+    "10n": ["assets/rain-1-night.svg", "assets/rain-2-night.svg"],
+    "11d": ["assets/thunderstorm-day.svg"],
+    "11n": ["assets/thunderstorm-night.svg"],
+    "13d": ["assets/snow-day.svg"],
+    "13n": ["assets/snow-night.svg"],
+    "50d": ["assets/mist-day.svg"],
+    "50n": ["assets/mist-night.svg"]
+};
+
+
+
+
+function updateForecastContainer(data) {
+    const forecastContainer = document.getElementById('forecastContainer');
+    forecastContainer.innerHTML = ''; // Limpa o conteúdo anterior
+
+    data.list.forEach((forecast, index) => {
+        if (index < 7) { // Limita a 7 previsões
+            const dateTime = new Date(forecast.dt * 1000);
+            const tempMax = forecast.main.temp_max.toFixed(1); // Temperatura máxima
+            const tempMin = forecast.main.temp_min.toFixed(1); // Temperatura mínima
+            const description = forecast.weather[0].description;
+            const speed = forecast.wind.speed;
+            const humidity = forecast.main.humidity;
+
+            const iconCode = forecast.weather[0].icon;
+            let iconFileName;
+            const variations = weatherIcons[iconCode];
+            
+            if (variations) {
+                const randomIndex = Math.floor(Math.random() * variations.length);
+                iconFileName = variations[randomIndex];
+            }
+    
+            const iconUrl = iconFileName ? iconFileName : "http://openweathermap.org/img/w/" + iconCode + ".svg";
+            console.log(iconUrl);
+    
+    
+            const forecastDiv = document.createElement('div');
+            forecastDiv.className = 'forecast-item';
+            forecastDiv.innerHTML = `
+            <h3>${dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h3>
+            <img src="${iconUrl}" alt="${description}" class="weather-icon" />
+            <p class="weather-description">${description}</p>
+            <p class="temperature-range"><span class="temp-max">${tempMax}°C</span> | <span class="temp-min">${tempMin}°C</span></p>
+            <div class="wind-humidity-info">
+                <img src="wind-icon.png" alt="Wind" class="small-icon">
+                <span>${speed}km/h</span>
+                <img src="humidity-icon.png" alt="Humidity" class="small-icon">
+                <span>${humidity}%</span>
+            </div>
+        `;
+        
+            forecastContainer.appendChild(forecastDiv);
+        }
+    });
+    
 }
 
 
@@ -147,31 +263,6 @@ function getLocalTimeForOffset(offset) {
     return localTime.toLocaleString();
 }
 
-// Exemplo de uso: para um fuso horário com offset -3 (como Brasília, fora do horário de verão)
-const offsetBrasilia = -3;
-console.log("Hora local para o offset:", getLocalTimeForOffset(offsetBrasilia));
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('mainContainer');
-    const hour = new Date().getHours(); // Obtém a hora atual
-
-    // Considera-se "dia" entre as 6h e as 18h
-    if (hour >= 6 && hour < 18) {
-        container.classList.add('day');
-        container.classList.remove('night');
-    } else {
-        container.classList.add('night');
-        container.classList.remove('day');
-    }
-});
-
-// Chama a função para definir o tema inicialmente
-updateThemeBasedOnTime();
-
-// Opção: você pode querer atualizar o tema automaticamente
-// Isso pode ser feito configurando um intervalo ou ouvinte de eventos adequado
-// Atualiza o tema a cada hora
-setInterval(updateThemeBasedOnTime, 3600000); // 3600000 milissegundos = 1 hora
 
 
